@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Escuela Portuaria · Valparaíso</title>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #111; color: #eee; font-family: Arial, sans-serif; overflow: hidden; touch-action: none; user-select: none; }
+#wrap { display: flex; flex-direction: column; align-items: center; height: 100%; }
+canvas { display: block; width: 100vw; max-width: calc((100vh - 120px) * 1.6); image-rendering: pixelated; background: #000; }
+#pad { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 640px; padding: 10px 14px; gap: 8px; }
+.grp { display: flex; gap: 6px; }
+button { width: 56px; height: 56px; font-size: 22px; border-radius: 14px; border: 2px solid #555; background: #2a2a33; color: #fff; }
+button:active { background: #c0392b; }
+#punch { width: 84px; background: #7a1f1f; font-size: 28px; }
+#sw { background: #1f4a7a; }
+#help { font-size: 12px; color: #999; text-align: center; padding: 0 10px 6px; }
+@media (max-width: 480px) {
+  button { width: 44px; height: 44px; font-size: 18px; }
+  #punch { width: 64px; font-size: 24px; }
+  #pad { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="c"></canvas>
+  <div id="pad">
+    <div class="grp">
+      <button id="bL">◀</button>
+      <button id="bU">▲</button>
+      <button id="bD">▼</button>
+      <button id="bR">▶</button>
+    </div>
+    <div class="grp">
+      <button id="sw">🔄</button>
+      <button id="punch">👊</button>
+    </div>
+  </div>
+  <div id="help">Flechas o WASD: moverte · Espacio o click: atacar (mantén para repetir) · 1-4 o Q/E: cambiar arma</div>
+</div>
+
+<!-- Los 3 archivos del juego (el orden importa) -->
+<script src="mapa.js"></script>
+<script src="sprites.js"></script>
+<script src="codigo.js"></script>
+</body>
+</html>
