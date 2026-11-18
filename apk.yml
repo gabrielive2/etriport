@@ -1,0 +1,31 @@
+name: Compilar APK
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      - name: Juntar el juego (index + codigo + mapa + assets)
+        run: |
+          mkdir www
+          cp -r index.html codigo mapa assets www/
+      - name: Instalar Capacitor
+        run: npm install
+      - name: Crear proyecto Android
+        run: npx cap add android && npx cap sync android
+      - name: Pantalla horizontal
+        run: sed -i 's/<activity/<activity android:screenOrientation="landscape"/' android/app/src/main/AndroidManifest.xml
+      - name: Compilar APK
+        working-directory: android
+        run: chmod +x gradlew && ./gradlew assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: guerra-anfibia-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
