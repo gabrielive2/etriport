@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Guerra Anfibia</title>
+<style>
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #111; color: #eee; font-family: Arial, sans-serif; overflow: hidden; touch-action: none; user-select: none; }
+#wrap { display: flex; flex-direction: column; align-items: center; height: 100%; }
+canvas { display: block; width: 100vw; max-width: calc((100vh - 120px) * 1.6); image-rendering: pixelated; background: #000; }
+#wrap:fullscreen, #wrap:-webkit-full-screen { background: #000; justify-content: center; }
+#wrap:fullscreen canvas, #wrap:-webkit-full-screen canvas { max-width: calc((100vh - 90px) * 1.6); }
+@media (hover: hover) and (pointer: fine) { canvas { max-width: calc((100vh - 70px) * 1.6); } #pad { display: none; } }
+#fs { position: fixed; top: 6px; right: 6px; width: 40px; height: 40px; font-size: 20px; opacity: .75; z-index: 5; }
+#pad { display: flex; justify-content: space-between; align-items: center; width: 100%; max-width: 640px; padding: 10px 14px; gap: 8px; }
+.grp { display: flex; gap: 6px; }
+button { width: 56px; height: 56px; font-size: 22px; border-radius: 14px; border: 2px solid #555; background: #2a2a33; color: #fff; }
+button:active { background: #c0392b; }
+#punch { width: 84px; background: #7a1f1f; font-size: 28px; }
+#sw { background: #1f4a7a; }
+#help { font-size: 12px; color: #999; text-align: center; padding: 0 10px 6px; }
+@media (max-width: 480px) {
+  button { width: 44px; height: 44px; font-size: 18px; }
+  #punch { width: 64px; font-size: 24px; }
+  #pad { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <button id="fs" title="Pantalla completa (F)">⛶</button>
+  <canvas id="c"></canvas>
+  <div id="pad">
+    <div class="grp">
+      <button id="bL">◀</button>
+      <button id="bU">▲</button>
+      <button id="bD">▼</button>
+      <button id="bR">▶</button>
+    </div>
+    <div class="grp">
+      <button id="bG" title="Lanzar granada (G)">💣</button>
+      <button id="bT" title="Subir / bajar de vehículo (T)">🚤</button>
+      <button id="rl" title="Recargar (R)">♻️</button>
+      <button id="sw">🔄</button>
+      <button id="punch">🔫</button>
+    </div>
+  </div>
+  <div id="help">WASD o flechas: moverte · E: disparar (mantén) · R: recargar · Q: cambiar arma (o 1-4) · T: subir/bajar de barco, camión, tanque, cañón o ametralladora · X: abandonar amigos (al escapar) · 1-7: armas · H: bocina (camión) · G: granada · Shift: correr · Esc: pausa · M: sonido · F: pantalla completa · Multijugador: al abrir el juego elige «Crear sala» o «Unirse»</div>
+</div>
+
+<!-- mapa/ = el mapa · assets/ = los dibujos · codigo/ = la lógica del juego -->
+<script src="mapa.js"></script>
+<script src="codigo.js"></script>
+<!-- Multijugador: PeerJS (conexión directa entre navegadores) + la sala -->
+<script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script>if (!window.Peer) document.write('<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"><\/script>');</script>
+<script src="multi.js"></script>
+</body>
+</html>
