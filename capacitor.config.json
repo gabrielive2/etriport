@@ -1,6 +1,0 @@
-{
-  "appId": "cl.guerraanfibia.app",
-  "appName": "Guerra Anfibia",
-  "webDir": "www",
-  "android": { "allowMixedContent": true }
-}
