@@ -567,7 +567,7 @@ function cuadrosDeHoja(im) {
 
 // Carga un rival: primero busca su hoja (<id>_<n>_hoja.png); si no hay, usa la imagen sola
 async function cargarEnemigo(id, n) {
-  const base = 'sprite/' + id + '_' + n;
+  const base = 'Sprite/' + id + '_' + n;
   const hoja = await cargarImagen(base + '_hoja.png', false);
   if (hoja) return { frames: cuadrosDeHoja(hoja), hoja: true };
   const v = crearVariantes(await cargarImagen(base + '.png'));
@@ -586,14 +586,14 @@ async function cargarSprites() {
 
   for (let k = 0; k < 6; k++) tareas.push(cargarEnemigo('aliado', k + 1).then(set => { SPR.aliados[k] = set; }));
   ['pistola', 'escopeta', 'fusil', 'ametralladora', 'francotirador', 'lanzacohetes', 'cuchillo', 'fogonazo'].forEach(nombre => {
-    tareas.push(cargarImagen('sprite/' + nombre + '.png').then(im => { SPR.armas[nombre] = im; }));
+    tareas.push(cargarImagen('Sprite/' + nombre + '.png').then(im => { SPR.armas[nombre] = im; }));
   });
-  tareas.push(cargarImagen('sprite/camion.png').then(im => { SPR.camion = im; }));
-  tareas.push(cargarImagen('sprite/tanque.png').then(im => { SPR.tanque = im; }));
-  tareas.push(cargarImagen('sprite/canon.png').then(im => { SPR.canon = im; }));
-  tareas.push(cargarImagen('sprite/ametra.png').then(im => { SPR.ametra = im; }));
-  tareas.push(cargarImagen('sprite/explosion.png').then(im => { SPR.explosion = im; }));
-  tareas.push(cargarImagen('sprite/vendas.png').then(im => { SPR.colacion = im; }));
+  tareas.push(cargarImagen('Sprite/camion.png').then(im => { SPR.camion = im; }));
+  tareas.push(cargarImagen('Sprite/tanque.png').then(im => { SPR.tanque = im; }));
+  tareas.push(cargarImagen('Sprite/canon.png').then(im => { SPR.canon = im; }));
+  tareas.push(cargarImagen('Sprite/ametra.png').then(im => { SPR.ametra = im; }));
+  tareas.push(cargarImagen('Sprite/explosion.png').then(im => { SPR.explosion = im; }));
+  tareas.push(cargarImagen('Sprite/vendas.png').then(im => { SPR.colacion = im; }));
 
   await Promise.all(tareas);
 
